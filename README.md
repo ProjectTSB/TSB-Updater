@@ -5,6 +5,7 @@ TSBのパッチレベルのアップデートを実行するツール
 ![screenshot0](https://i.imgur.com/vs9fywo.png, "screenshot0")
 
 ## ダウンロード  
+[Releases](https://github.com/ProjectTSB/TSB-Updater/releases)
 
 ## 動作要件  
 * .NETCore 3.1
