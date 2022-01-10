@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TSB_Updater.util
@@ -22,11 +20,13 @@ namespace TSB_Updater.util
 
         public Task Run(string folderPath, Release release)
         {
-            return Task.Run(() => {
+            return Task.Run(() =>
+            {
                 string zipPath = $@"{Path.GetTempPath()}\datapacks.zip";
                 // datapacks.zipダウンロード
                 wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
-                wc.DownloadFileCompleted += delegate (object sender, System.ComponentModel.AsyncCompletedEventArgs e) {
+                wc.DownloadFileCompleted += delegate (object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+                {
                     // datapacksフォルダ削除
                     Directory.Delete($@"{folderPath}\datapacks", true);
                     // datapacks.zip 解凍

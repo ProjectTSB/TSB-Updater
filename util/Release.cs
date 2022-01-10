@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TSB_Updater.util
+﻿namespace TSB_Updater.util
 {
     // リリース情報
     public class Release

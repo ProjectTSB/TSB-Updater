@@ -3,8 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TSB_Updater.util
 {
@@ -34,7 +32,8 @@ namespace TSB_Updater.util
                     releases.Add(release);
                 });
             }
-            releases.Sort((a, b) => {
+            releases.Sort((a, b) =>
+            {
                 return Version.Parse(b.Version).CompareTo(Version.Parse(a.Version));
             });
             return releases;

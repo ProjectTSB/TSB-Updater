@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using TSB_Updater.util;
-using static TSB_Updater.util.UpdaterHelper;
 
 namespace TSB_Updater
 {
@@ -66,7 +65,7 @@ namespace TSB_Updater
             }
 
             var leatestRelease = UpdaterHelper.GetUpdatableLatestRlease(currentVersion, releases);
-            if(leatestRelease == null)
+            if (leatestRelease == null)
             {
                 MessageBox.Show("利用可能な更新はありません。\n手動でアップデートしてください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -77,7 +76,8 @@ namespace TSB_Updater
                 {
                     MessageBox.Show($"最新バージョン(v{releases[0]})が公開されています。\n手動でダウンロードしてください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
-                } else
+                }
+                else
                 {
                     MessageBox.Show($"すでに最新バージョン(v{currentVersion})を利用しています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

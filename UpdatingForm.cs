@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TSB_Updater.util;
 
@@ -36,7 +30,8 @@ namespace TSB_Updater
             try
             {
                 await updateRunner.Run(worldPath, release);
-            } catch (Exception exp)
+            }
+            catch (Exception exp)
             {
                 MessageBox.Show("エラーが発生しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Result = UpdateResult.FAILED;
@@ -49,7 +44,8 @@ namespace TSB_Updater
         {
             updating = false;
             updateRunner.Dispose();
-            this.Invoke((MethodInvoker)delegate () {
+            this.Invoke((MethodInvoker)delegate ()
+            {
                 this.Result = UpdateResult.OK;
                 this.Close();
             });
@@ -57,7 +53,8 @@ namespace TSB_Updater
 
         private void UpdateRunner_onChangeUpdateProgress(object sender, UpdateProgressArgs e)
         {
-            this.Invoke((MethodInvoker)delegate () {
+            this.Invoke((MethodInvoker)delegate ()
+            {
                 switch (e.State)
                 {
                     case UpdateState.Downloading:
@@ -79,7 +76,8 @@ namespace TSB_Updater
                 if (dr == DialogResult.Yes)
                 {
                     this.Result = UpdateResult.CANCEL;
-                } else
+                }
+                else
                 {
                     e.Cancel = true;
                 }

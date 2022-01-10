@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Windows.Forms;
-using System.Net;
 using System.IO.Compression;
+using System.Net;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TSB_Updater.util
 {
@@ -22,7 +21,8 @@ namespace TSB_Updater.util
             if (File.Exists($@"{folderPath}\version"))
             {
                 return File.ReadAllText($@"{folderPath}\version");
-            } else
+            }
+            else
             {
                 foreach (string line in File.ReadLines($@"{folderPath}\Readme.txt"))
                 {
@@ -40,7 +40,7 @@ namespace TSB_Updater.util
         public static Release GetUpdatableLatestRlease(string currentVersion, List<Release> releases)
         {
             var cv = Version.Parse(currentVersion);
-            foreach(var e in releases)
+            foreach (var e in releases)
             {
                 var ev = Version.Parse(e.Version);
                 int c = cv.CompareTo(ev);
@@ -52,9 +52,10 @@ namespace TSB_Updater.util
             return null;
         }
 
-        public static Task Update(string folderPath,Release release,  Label infoLabel,ProgressBar progressBar, Action callback)
+        public static Task Update(string folderPath, Release release, Label infoLabel, ProgressBar progressBar, Action callback)
         {
-            return Task.Run(() => {
+            return Task.Run(() =>
+            {
                 var wc = new WebClient();
                 string zipPath = $@"{Path.GetTempPath()}\datapacks.zip";
                 // datapacks.zipダウンロード

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using TSB_Updater.util;
-using static TSB_Updater.util.UpdaterHelper;
 
 namespace TSB_Updater
 {
