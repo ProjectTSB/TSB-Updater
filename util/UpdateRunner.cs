@@ -8,8 +8,8 @@ namespace TSB_Updater.util
 {
     public class UpdateRunner : IDisposable
     {
-        public event EventHandler onComplete;
-        public event EventHandler<UpdateProgressArgs> onChangeUpdateProgress;
+        public event EventHandler Completed;
+        public event EventHandler<UpdateProgressArgs> UpdateProgressChanged;
 
         private WebClient wc = new WebClient();
 
@@ -38,7 +38,7 @@ namespace TSB_Updater.util
                     // バージョンファイル書き換え
                     File.WriteAllText($@"{folderPath}\version", release.Version);
                     // 完了
-                    onComplete(this, null);
+                    Completed(this, null);
                 };
                 wc.DownloadFileAsync(new Uri(release.DatapackUrl), zipPath);
                 wc.Dispose();
@@ -48,13 +48,13 @@ namespace TSB_Updater.util
         private void zipProgress_ProgressChanged(object sender, ZipProgress e)
         {
             var updateProgressAges = new UpdateProgressArgs(UpdateState.Extracting, (int)(e.Processed / (double)e.Total * 100));
-            onChangeUpdateProgress(this, updateProgressAges);
+            UpdateProgressChanged(this, updateProgressAges);
         }
 
         private void Wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             var updateProgressAges = new UpdateProgressArgs(UpdateState.Downloading, e.ProgressPercentage);
-            onChangeUpdateProgress(this, updateProgressAges);
+            UpdateProgressChanged(this, updateProgressAges);
         }
     }
 

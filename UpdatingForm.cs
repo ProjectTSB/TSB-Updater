@@ -25,8 +25,8 @@ namespace TSB_Updater
         {
             updating = true;
             updateRunner = new UpdateRunner();
-            updateRunner.onChangeUpdateProgress += UpdateRunner_onChangeUpdateProgress;
-            updateRunner.onComplete += UpdateRunner_onComplete;
+            updateRunner.UpdateProgressChanged += UpdateRunner_onChangeUpdateProgress;
+            updateRunner.Completed += UpdateRunner_onComplete;
             try
             {
                 await updateRunner.Run(worldPath, release);
