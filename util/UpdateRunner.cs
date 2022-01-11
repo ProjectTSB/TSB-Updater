@@ -10,7 +10,6 @@ namespace TSB_Updater.util
     {
         public event EventHandler Completed;
         public event EventHandler<UpdateProgressArgs> UpdateProgressChanged;
-        public event EventHandler Disposed;
 
         public bool IsDisposed { get; private set; }
 
