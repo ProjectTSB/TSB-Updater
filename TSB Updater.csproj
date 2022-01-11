@@ -8,8 +8,18 @@
     <PackageId>TSB Updater</PackageId>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description></Description>
+    <PackageLicenseFile></PackageLicenseFile>
+    <RepositoryUrl>https://github.com/ProjectTSB/TSB-Updater</RepositoryUrl>
+    <AssemblyOriginatorKeyFile>TSBUpdater.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="LICENSE" />
+    <None Remove="LICENSE" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.26.0" />
