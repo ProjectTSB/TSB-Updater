@@ -23,6 +23,8 @@ namespace TSB_Updater
 
         private async void UpdatingForm_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+
             updating = true;
             updateRunner = new UpdateRunner();
             updateRunner.UpdateProgressChanged += UpdateRunner_onChangeUpdateProgress;
