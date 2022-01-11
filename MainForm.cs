@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using TSB_Updater.util;
@@ -64,17 +65,26 @@ namespace TSB_Updater
                 return;
             }
 
-            var leatestRelease = UpdaterHelper.GetUpdatableLatestRlease(currentVersion, releases);
-            if (leatestRelease == null)
+            var latestRelease = UpdaterHelper.GetUpdatableLatestRlease(currentVersion, releases);
+            if (latestRelease == null)
             {
                 MessageBox.Show("利用可能な更新はありません。\n手動でアップデートしてください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (leatestRelease.Version == currentVersion)
+            if (latestRelease.Version == currentVersion)
             {
-                if (Version.Parse(releases[0].Version).CompareTo(Version.Parse(leatestRelease.Version)) == 1)
+                if (Version.Parse(releases[0].Version).CompareTo(Version.Parse(latestRelease.Version)) == 1)
                 {
-                    MessageBox.Show($"最新バージョン(v{releases[0]})が公開されています。\n手動でダウンロードしてください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DialogResult result = MessageBox.Show($"最新バージョン(v{releases[0].Version})が公開されています。\nこの更新は現在のワールドと互換性が無いため、手動でダウンロードする必要があります。\nダウンロードページを開きますか？", "エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    if (result == DialogResult.Yes)
+                    {
+                        ProcessStartInfo pi = new ProcessStartInfo()
+                        {
+                            FileName = releases[0].Url,
+                            UseShellExecute = true,
+                        };
+                        Process.Start(pi);
+                    }
                     return;
                 }
                 else
@@ -84,7 +94,7 @@ namespace TSB_Updater
                 return;
             }
 
-            var vif = new VersionInfoForm(worldPath.Text, leatestRelease);
+            var vif = new VersionInfoForm(worldPath.Text, latestRelease);
 
             vif.ShowDialog();
 
@@ -93,9 +103,18 @@ namespace TSB_Updater
                 MessageBox.Show("アップデートが完了しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            if (Version.Parse(releases[0].Version).CompareTo(Version.Parse(leatestRelease.Version)) == 1)
+            if (Version.Parse(releases[0].Version).CompareTo(Version.Parse(latestRelease.Version)) == 1)
             {
-                MessageBox.Show($"最新バージョン(v{releases[0]})が公開されています。\n手動でダウンロードしてください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show($"最新バージョン(v{releases[0].Version})が公開されています。\nこの更新は現在のワールドと互換性が無いため、手動でダウンロードする必要があります。\nダウンロードページを開きますか？", "最新バージョンが利用可能です。", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                {
+                    ProcessStartInfo pi = new ProcessStartInfo()
+                    {
+                        FileName = releases[0].Url,
+                        UseShellExecute = true,
+                    };
+                    Process.Start(pi);
+                }
                 return;
             }
         }
