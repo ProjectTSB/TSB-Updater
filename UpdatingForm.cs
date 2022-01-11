@@ -58,13 +58,13 @@ namespace TSB_Updater
                 switch (e.State)
                 {
                     case UpdateState.Downloading:
-                        infoLabel.Text = "更新をダウンロード中";
+                        infoLabel.Text = $"更新をダウンロード中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed / 1000000.0d:0.0}/{e.Total / 1000000.0d:0.0} MB)";
                         break;
                     case UpdateState.Extracting:
-                        infoLabel.Text = "解凍中";
+                        infoLabel.Text = $"更新を適用中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed}/{e.Total})";
                         break;
                 }
-                progressBar.Value = e.ProgressPercentage;
+                progressBar.Value = (int)(Decimal.Divide(e.Processed, e.Total) * 100);
             });
         }
 

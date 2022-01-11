@@ -47,13 +47,13 @@ namespace TSB_Updater.util
 
         private void zipProgress_ProgressChanged(object sender, ZipProgress e)
         {
-            var updateProgressAges = new UpdateProgressArgs(UpdateState.Extracting, (int)(e.Processed / (double)e.Total * 100));
+            var updateProgressAges = new UpdateProgressArgs(UpdateState.Extracting, e.Total, e.Processed);
             UpdateProgressChanged(this, updateProgressAges);
         }
 
         private void Wc_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            var updateProgressAges = new UpdateProgressArgs(UpdateState.Downloading, e.ProgressPercentage);
+            var updateProgressAges = new UpdateProgressArgs(UpdateState.Downloading, e.TotalBytesToReceive, e.BytesReceived);
             UpdateProgressChanged(this, updateProgressAges);
         }
     }
@@ -61,12 +61,14 @@ namespace TSB_Updater.util
     public class UpdateProgressArgs
     {
         public int State { get; set; }
-        public int ProgressPercentage { get; set; }
+        public long Total { get; set; }
+        public long Processed { get; set; }
 
-        public UpdateProgressArgs(int state, int progressPercentage)
+        public UpdateProgressArgs(int state, long total, long processed)
         {
             this.State = state;
-            this.ProgressPercentage = progressPercentage;
+            this.Total = total;
+            this.Processed = processed;
         }
     }
 
