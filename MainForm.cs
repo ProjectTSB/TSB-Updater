@@ -94,7 +94,7 @@ namespace TSB_Updater
                 return;
             }
 
-            var vif = new VersionInfoForm(worldPath.Text, latestRelease);
+            var vif = new VersionInfoForm(worldPath.Text, currentVersion,latestRelease);
 
             vif.ShowDialog();
 

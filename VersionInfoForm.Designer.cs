@@ -33,6 +33,7 @@ namespace TSB_Updater
             this.webView = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.updateButton = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.currentVersionLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.webView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,11 +77,21 @@ namespace TSB_Updater
             this.linkLabel1.Text = "詳細";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // currentVersionLabel
+            // 
+            this.currentVersionLabel.AutoSize = true;
+            this.currentVersionLabel.Location = new System.Drawing.Point(13, 316);
+            this.currentVersionLabel.Name = "currentVersionLabel";
+            this.currentVersionLabel.Size = new System.Drawing.Size(105, 20);
+            this.currentVersionLabel.TabIndex = 4;
+            this.currentVersionLabel.Text = "現在のバージョン";
+            // 
             // VersionInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(515, 353);
+            this.Controls.Add(this.currentVersionLabel);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.webView);
@@ -103,5 +114,6 @@ namespace TSB_Updater
         private Microsoft.Web.WebView2.WinForms.WebView2 webView;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Label currentVersionLabel;
     }
 }
