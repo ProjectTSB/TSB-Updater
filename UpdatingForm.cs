@@ -53,19 +53,22 @@ namespace TSB_Updater
 
         private void UpdateRunner_onChangeUpdateProgress(object sender, UpdateProgressArgs e)
         {
-            this.Invoke((MethodInvoker)delegate ()
+            if (!((UpdateRunner)sender).IsDisposed)
             {
-                switch (e.State)
+                this.Invoke((MethodInvoker)delegate ()
                 {
-                    case UpdateState.Downloading:
-                        infoLabel.Text = $"更新をダウンロード中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed / 1000000.0d:0.0}/{e.Total / 1000000.0d:0.0} MB)";
-                        break;
-                    case UpdateState.Extracting:
-                        infoLabel.Text = $"更新を適用中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed}/{e.Total})";
-                        break;
-                }
-                progressBar.Value = (int)(Decimal.Divide(e.Processed, e.Total) * 100);
-            });
+                    switch (e.State)
+                    {
+                        case UpdateState.Downloading:
+                            infoLabel.Text = $"更新をダウンロード中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed / 1000000.0d:0.0}/{e.Total / 1000000.0d:0.0} MB)";
+                            break;
+                        case UpdateState.Extracting:
+                            infoLabel.Text = $"更新を適用中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed}/{e.Total})";
+                            break;
+                    }
+                    progressBar.Value = (int)(Decimal.Divide(e.Processed, e.Total) * 100);
+                });
+            }
         }
 
         private void UpdatingForm_FormClosing(object sender, FormClosingEventArgs e)

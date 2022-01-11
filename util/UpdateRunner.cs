@@ -10,12 +10,16 @@ namespace TSB_Updater.util
     {
         public event EventHandler Completed;
         public event EventHandler<UpdateProgressArgs> UpdateProgressChanged;
+        public event EventHandler Disposed;
+
+        public bool IsDisposed { get; private set; }
 
         private WebClient wc = new WebClient();
 
         public void Dispose()
         {
             wc.Dispose();
+            this.IsDisposed = true;
         }
 
         public Task Run(string folderPath, Release release)
