@@ -12,14 +12,14 @@ namespace TSB_Updater
 
         private string worldPath;
         private Release release;
-        private string currentVersion;
 
         public VersionInfoForm(string worldPath, string currentVersion, Release release)
         {
             InitializeComponent();
             this.worldPath = worldPath;
             this.release = release;
-            this.currentVersion = currentVersion;
+            currentVersionLabel.Text = $"現在のバージョン v{currentVersion}";
+            label1.Text = $"新しいバージョン(v{release.Version})が利用可能です";
         }
 
         private async void VersionInfoForm_Load(object sender, EventArgs e)
@@ -29,7 +29,6 @@ namespace TSB_Updater
             var html = Markdig.Markdown.ToHtml($"# v{release.Version}  \n" + release.Details);
             await webView.EnsureCoreWebView2Async();
             webView.NavigateToString(html);
-            currentVersionLabel.Text = $"現在のバージョン v{currentVersion}";
         }
 
         private void updateButton_Click(object sender, EventArgs e)

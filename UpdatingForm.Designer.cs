@@ -60,7 +60,7 @@ namespace TSB_Updater
             this.MinimizeBox = false;
             this.Name = "UpdatingForm";
             this.ShowIcon = false;
-            this.Text = "更新中";
+            this.Text = "更新";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UpdatingForm_FormClosing);
             this.Load += new System.EventHandler(this.UpdatingForm_Load);
             this.ResumeLayout(false);
