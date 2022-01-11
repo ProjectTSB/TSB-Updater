@@ -2,7 +2,7 @@
 TSBのパッチレベルのアップデートを実行するツール  
 
 ## スクリーンショット  
-![screenshot0](https://i.imgur.com/vs9fywo.png, "screenshot0")
+![screenshot0](https://i.imgur.com/kapfRRz.png, "screenshot0")
 
 ## ダウンロード  
 [Releases](https://github.com/ProjectTSB/TSB-Updater/releases)
