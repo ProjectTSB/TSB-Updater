@@ -31,7 +31,7 @@ namespace TSB_Updater
             {
                 await updateRunner.Run(worldPath, release);
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 MessageBox.Show("エラーが発生しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Result = UpdateResult.FAILED;

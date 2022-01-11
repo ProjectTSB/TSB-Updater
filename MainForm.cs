@@ -32,7 +32,7 @@ namespace TSB_Updater
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            var releases = new List<Release>() { }; // リリース情報
+            List<Release> releases; // リリース情報
             string currentVersion;
 
             if (!Directory.Exists(worldPath.Text))
@@ -59,7 +59,7 @@ namespace TSB_Updater
             {
                 releases = GitHubHelper.GetReleases();
             }
-            catch (Exception exp)
+            catch (Exception)
             {
                 MessageBox.Show("リリース情報の取得に失敗しました。\n手動でアップデートしてください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
