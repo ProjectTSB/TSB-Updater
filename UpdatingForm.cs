@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Taskbar;
+using System;
 using System.Windows.Forms;
 using TSB_Updater.util;
 
@@ -31,12 +32,16 @@ namespace TSB_Updater
             updateRunner.Completed += UpdateRunner_onComplete;
             try
             {
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
                 await updateRunner.Run(worldPath, release);
             }
             catch (Exception)
             {
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Error);
                 MessageBox.Show("エラーが発生しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.updating = false;
                 this.Result = UpdateResult.FAILED;
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
                 this.Close();
             }
 
@@ -49,6 +54,7 @@ namespace TSB_Updater
             this.Invoke((MethodInvoker)delegate ()
             {
                 this.Result = UpdateResult.OK;
+                TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.NoProgress);
                 this.Close();
             });
         }
@@ -69,6 +75,7 @@ namespace TSB_Updater
                             break;
                     }
                     progressBar.Value = (int)(Decimal.Divide(e.Processed, e.Total) * 100);
+                    TaskbarManager.Instance.SetProgressValue((int)(Decimal.Divide(e.Processed, e.Total) * 100), 100);
                 });
             }
         }
