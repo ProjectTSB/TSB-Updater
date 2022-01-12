@@ -27,13 +27,13 @@ namespace TSB_Updater
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             updating = true;
-            updateRunner = new UpdateRunner();
+            updateRunner = new UpdateRunner(worldPath, release);
             updateRunner.UpdateProgressChanged += UpdateRunner_onChangeUpdateProgress;
             updateRunner.Completed += UpdateRunner_onComplete;
             try
             {
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
-                await updateRunner.Run(worldPath, release);
+                await updateRunner.Run();
             }
             catch (Exception)
             {
@@ -47,6 +47,7 @@ namespace TSB_Updater
 
         }
 
+        // TODO: イベント名の変更
         private void UpdateRunner_onComplete(object sender, EventArgs e)
         {
             updating = false;
@@ -67,11 +68,14 @@ namespace TSB_Updater
                 {
                     switch (e.State)
                     {
-                        case UpdateState.Downloading:
+                        case UpdateState.DownloadingDatapacks:
                             infoLabel.Text = $"更新をダウンロード中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed / 1000000.0d:0.0}/{e.Total / 1000000.0d:0.0} MB)";
                             break;
                         case UpdateState.Extracting:
                             infoLabel.Text = $"更新を適用中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed}/{e.Total})";
+                            break;
+                        case UpdateState.DownloadingResoursepack:
+                            infoLabel.Text = $"リソースパックをダウンロード中 {Decimal.Divide(e.Processed, e.Total) * 100:0}% ({e.Processed / 1000000.0d:0.0}/{e.Total / 1000000.0d:0.0} MB)";
                             break;
                     }
                     progressBar.Value = (int)(Decimal.Divide(e.Processed, e.Total) * 100);
@@ -87,6 +91,7 @@ namespace TSB_Updater
                 DialogResult dr = MessageBox.Show("更新を中断してよろしいですか？", "確認", MessageBoxButtons.YesNo);
                 if (dr == DialogResult.Yes)
                 {
+                    updateRunner.Cancel();
                     this.Result = UpdateResult.CANCEL;
                 }
                 else

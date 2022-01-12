@@ -37,6 +37,12 @@ namespace TSB_Updater.util
             return "unknown";
         }
 
+        public static bool CheckUsedServer(string folderPath)
+        {
+            string outerPath = folderPath.Substring(0, folderPath.LastIndexOf(@"\"));
+            return File.Exists($@"{outerPath}\server.properties");
+        }
+
         public static Release GetUpdatableLatestRlease(string currentVersion, List<Release> releases)
         {
             var cv = Version.Parse(currentVersion);
