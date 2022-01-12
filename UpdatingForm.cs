@@ -29,7 +29,7 @@ namespace TSB_Updater
             updating = true;
             updateRunner = new UpdateRunner(worldPath, release);
             updateRunner.UpdateProgressChanged += UpdateRunner_onChangeUpdateProgress;
-            updateRunner.Completed += UpdateRunner_onComplete;
+            updateRunner.Completed += UpdateRunner_Completed;
             try
             {
                 TaskbarManager.Instance.SetProgressState(TaskbarProgressBarState.Normal);
@@ -47,8 +47,7 @@ namespace TSB_Updater
 
         }
 
-        // TODO: イベント名の変更
-        private void UpdateRunner_onComplete(object sender, EventArgs e)
+        private void UpdateRunner_Completed(object sender, EventArgs e)
         {
             updating = false;
             updateRunner.Dispose();
