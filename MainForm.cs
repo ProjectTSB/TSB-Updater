@@ -75,7 +75,7 @@ namespace TSB_Updater
             {
                 if (Version.Parse(releases[0].Version).CompareTo(Version.Parse(latestRelease.Version)) == 1)
                 {
-                    DialogResult result = MessageBox.Show($"最新バージョン(v{releases[0].Version})が公開されています。\nこの更新は現在のワールドと互換性が無いため、手動でダウンロードする必要があります。\nダウンロードページを開きますか？", "エラー", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    DialogResult result = MessageBox.Show($"最新バージョン(v{releases[0].Version})が公開されています。\nこの更新は現在のワールドと互換性が無いため、手動でダウンロードする必要があります。\nダウンロードページを開きますか？", "情報", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (result == DialogResult.Yes)
                     {
                         ProcessStartInfo pi = new ProcessStartInfo()
@@ -89,7 +89,7 @@ namespace TSB_Updater
                 }
                 else
                 {
-                    MessageBox.Show($"すでに最新バージョン(v{currentVersion})を利用しています。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"すでに最新バージョン(v{currentVersion})を利用しています。", "情報", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 return;
             }
@@ -105,7 +105,7 @@ namespace TSB_Updater
 
             if (Version.Parse(releases[0].Version).CompareTo(Version.Parse(latestRelease.Version)) == 1)
             {
-                DialogResult result = MessageBox.Show($"最新バージョン(v{releases[0].Version})が公開されています。\nこの更新は現在のワールドと互換性が無いため、手動でダウンロードする必要があります。\nダウンロードページを開きますか？", "最新バージョンが利用可能です。", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                DialogResult result = MessageBox.Show($"最新バージョン(v{releases[0].Version})が公開されています。\nこの更新は現在のワールドと互換性が無いため、手動でダウンロードする必要があります。\nダウンロードページを開きますか？", "情報", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (result == DialogResult.Yes)
                 {
                     ProcessStartInfo pi = new ProcessStartInfo()
