@@ -35,6 +35,12 @@ namespace TSB_Updater
             List<Release> releases; // リリース情報
             string currentVersion;
 
+            if (Process.GetProcessesByName("javaw").Length > 0)
+            {
+                MessageBox.Show("不具合を避けるため、Minecraftを終了してから実行してください。", "Minecraftの起動を検知しました", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (!Directory.Exists(worldPath.Text))
             {
                 MessageBox.Show("フォルダーが存在しません。\nワールドフォルダーを指定してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
