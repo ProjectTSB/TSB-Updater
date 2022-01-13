@@ -8,7 +8,6 @@
         public string Url { get; set; } // リリースのURL
         public string DatapackUrl { get; set; } // データパックのダウンロードURL
         public string WorldUrl { get; set; } // ワールドファイルのダウンロードURL
-
         public string ResorcePackUrl { get; set; }
     }
 }
