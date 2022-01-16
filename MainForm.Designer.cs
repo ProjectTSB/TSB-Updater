@@ -113,7 +113,7 @@ namespace TSB_Updater
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainForm";
-            this.Text = "TSB Updater beta v1.1";
+            this.Text = "TSB Updater beta v1.2";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
