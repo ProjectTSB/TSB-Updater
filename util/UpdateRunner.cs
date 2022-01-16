@@ -70,8 +70,6 @@ namespace TSB_Updater.util
             var zip = new ZipArchive(File.OpenRead($@"{Path.GetTempPath()}\datapacks.zip"));
             zip.ExtractToDirectory($@"{this.WorldFolderPath}\datapacks", zipProgress);
             zip.Dispose();
-            // バージョンファイル書き換え
-            File.WriteAllText($@"{this.WorldFolderPath}\version", this.Release.Version);
             // 完了
             Completed(this, null);
         }

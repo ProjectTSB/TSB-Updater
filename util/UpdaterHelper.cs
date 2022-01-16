@@ -16,29 +16,21 @@ namespace TSB_Updater.util
         }
         public static string GetCurrentVersion(string folderPath)
         {
-            // Versionファイルがあるならそれを参照
-            if (File.Exists($@"{folderPath}\version"))
+            var TSBDFolder = "TheSkyBlock";
+            // v0.0.3以降
+            if (Directory.Exists($@"{folderPath}\datapacks\TheSkyBlessing"))
             {
-                return File.ReadAllText($@"{folderPath}\version");
+                TSBDFolder = "TheSkyBlessing";
             }
-            else
+            var path = $@"{folderPath}\datapacks\{TSBDFolder}\data\core\functions\load_once.mcfunction"; // バージョン取得用ファイル
+            var triggerString = "data modify storage global GameVersion set value "; // バージョン取得用
+            foreach (string line in File.ReadLines(path))
             {
-                var TSBDFolder = "TheSkyBlock";
-                // v0.0.3以降
-                if (Directory.Exists($@"{folderPath}\datapacks\TheSkyBlessing"))
+                var i = line.IndexOf(triggerString);
+                if (i != -1)
                 {
-                    TSBDFolder = "TheSkyBlessing";
-                }
-                var path = $@"{folderPath}\datapacks\{TSBDFolder}\data\core\functions\load_once.mcfunction"; // バージョン取得用ファイル
-                var triggerString = "data modify storage global GameVersion set value "; // バージョン取得用
-                foreach (string line in File.ReadLines(path))
-                {
-                    var i = line.IndexOf(triggerString);
-                    if (i != -1)
-                    {
-                        string[] e = line.Split(triggerString);
-                        return e[1].Replace("\"","").Replace("v","");
-                    }
+                    string[] e = line.Split(triggerString);
+                    return e[1].Replace("\"", "").Replace("v", "");
                 }
             }
             return "unknown";
