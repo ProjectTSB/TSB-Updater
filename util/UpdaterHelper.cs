@@ -12,7 +12,7 @@ namespace TSB_Updater.util
     {
         public static bool IsTSBFolder(string folderPath)
         {
-            return Directory.Exists($@"{folderPath}\datapacks\TheSkyBlock") && File.Exists($@"{folderPath}\Readme.txt");
+            return (Directory.Exists($@"{folderPath}\datapacks\TheSkyBlock") || Directory.Exists($@"{folderPath}\datapacks\TheSkyBlessing")) && File.Exists($@"{folderPath}\Readme.txt");
         }
         public static string GetCurrentVersion(string folderPath)
         {
