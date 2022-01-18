@@ -30,7 +30,7 @@ namespace TSB_Updater
 
             updating = true;
             updateRunner = new UpdateRunner(worldPath, release, asServer);
-            updateRunner.UpdateProgressChanged += UpdateRunner_onChangeUpdateProgress;
+            updateRunner.UpdateProgressChanged += UpdateRunner_ChangedUpdateProgress;
             updateRunner.Completed += UpdateRunner_Completed;
             try
             {
@@ -61,7 +61,7 @@ namespace TSB_Updater
             });
         }
 
-        private void UpdateRunner_onChangeUpdateProgress(object sender, UpdateProgressArgs e)
+        private void UpdateRunner_ChangedUpdateProgress(object sender, UpdateProgressArgs e)
         {
             if (!((UpdateRunner)sender).IsDisposed)
             {

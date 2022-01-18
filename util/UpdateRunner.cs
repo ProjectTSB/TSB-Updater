@@ -76,7 +76,7 @@ namespace TSB_Updater.util
             Completed(this, null);
         }
 
-        private void StartDownloadResorcepack()
+        private void StartDownloadResourcepack()
         {
             wc.DownloadProgressChanged += DownloadResourcepack_ProgressChanged;
             wc.DownloadFileCompleted += DownloadResourcepack_Completed;
@@ -126,7 +126,7 @@ namespace TSB_Updater.util
             else
             {
                 // resources.zip ダウンロード開始
-                StartDownloadResorcepack();
+                StartDownloadResourcepack();
             }
         }
 
