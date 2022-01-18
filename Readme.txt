@@ -1,4 +1,4 @@
-TSB Updater beta v1.3
+TSB Updater beta v1.4
 
 1. はじめに
 この度はTSB Updaterをダウンロードしていただきありがとうございます。
