@@ -72,7 +72,6 @@ namespace TSB_Updater.util
             zipProgress.ProgressChanged += zipProgress_ProgressChanged;
             var zip = new ZipArchive(File.OpenRead($@"{Path.GetTempPath()}\datapacks.zip"));
             zip.ExtractToDirectory($@"{this.WorldFolderPath}\datapacks", zipProgress);
-            zip.Dispose();
             // 完了
             Completed(this, null);
         }
