@@ -11,15 +11,17 @@ namespace TSB_Updater
 
         private string worldPath;
         private Release release;
+        private bool asServer;
         private bool updating = true;
 
         private UpdateRunner updateRunner;
 
-        public UpdatingForm(string worldPath, Release release)
+        public UpdatingForm(string worldPath, Release release, bool asServer = false)
         {
             InitializeComponent();
             this.worldPath = worldPath;
             this.release = release;
+            this.asServer = asServer;
         }
 
         private async void UpdatingForm_Load(object sender, EventArgs e)
@@ -27,7 +29,7 @@ namespace TSB_Updater
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
 
             updating = true;
-            updateRunner = new UpdateRunner(worldPath, release);
+            updateRunner = new UpdateRunner(worldPath, release, asServer);
             updateRunner.UpdateProgressChanged += UpdateRunner_onChangeUpdateProgress;
             updateRunner.Completed += UpdateRunner_Completed;
             try

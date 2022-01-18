@@ -38,8 +38,7 @@ namespace TSB_Updater.util
 
         public static bool CheckUsedServer(string folderPath)
         {
-            string outerPath = folderPath.Substring(0, folderPath.LastIndexOf(@"\"));
-            return File.Exists($@"{outerPath}\server.properties");
+            return File.Exists($@"{folderPath}\..\server.properties");
         }
 
         public static Release GetUpdatableLatestRlease(string currentVersion, List<Release> releases)
@@ -55,23 +54,6 @@ namespace TSB_Updater.util
                 }
             }
             return null;
-        }
-
-        public static Task Update(string folderPath, Release release, Label infoLabel, ProgressBar progressBar, Action callback)
-        {
-            return Task.Run(() =>
-            {
-                var wc = new WebClient();
-                string zipPath = $@"{Path.GetTempPath()}\datapacks.zip";
-                // datapacks.zipダウンロード
-                wc.DownloadFile(new Uri(release.DatapackUrl), zipPath);
-                // datapacksフォルダ削除
-                Directory.Delete($@"{folderPath}\datapacks", true);
-                // datapacks.zip 解凍
-                ZipFile.ExtractToDirectory(zipPath, $@"{folderPath}\datapacks", true);
-                // 完了時callback
-                callback();
-            });
         }
     }
 

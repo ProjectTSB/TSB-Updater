@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -15,15 +16,17 @@ namespace TSB_Updater.util
         public bool IsDisposed { get; private set; }
         public string WorldFolderPath { get; private set; }
         public Release Release { get; private set; }
+        public bool asServer { get; private set; }
 
         private WebClient wc = new WebClient();
         private Task task;
         private CancellationTokenSource tokenSource = new CancellationTokenSource();
 
-        public UpdateRunner(string folderPath, Release release)
+        public UpdateRunner(string folderPath, Release release, bool asServer = false)
         {
             this.WorldFolderPath = folderPath;
             this.Release = release;
+            this.asServer = asServer;
         }
 
         public void Dispose()
@@ -81,6 +84,25 @@ namespace TSB_Updater.util
             wc.DownloadFileAsync(new Uri(this.Release.ResorcePackUrl), $@"{this.WorldFolderPath}\resources.zip");
         }
 
+        private void UpdateServerProperties()
+        {
+            var path = $@"{this.WorldFolderPath}\..\server.properties";
+            var newTexts = new List<string> { };
+            foreach (string line in File.ReadAllLines(path))
+            {
+                if (line.StartsWith("resource-pack="))
+                {
+                    newTexts.Add($"resource-pack={Release.ResorcePackUrl}");
+                }
+                else
+                {
+                    newTexts.Add(line);
+                }
+            }
+            File.WriteAllLines(path, newTexts);
+            StartExtractDatapacks();
+        }
+
         private void zipProgress_ProgressChanged(object sender, ZipProgress e)
         {
             var updateProgressAges = new UpdateProgressArgs(UpdateState.Extracting, e.Total, e.Processed);
@@ -98,8 +120,15 @@ namespace TSB_Updater.util
             // 削除
             wc.DownloadProgressChanged -= DownloadDatapacks_ProgressChanged;
             wc.DownloadFileCompleted -= DownloadDatapacks_Completed;
-            // resources.zip ダウンロード開始
-            StartDownloadResorcepack();
+            if (asServer)
+            {
+                UpdateServerProperties();
+            }
+            else
+            {
+                // resources.zip ダウンロード開始
+                StartDownloadResorcepack();
+            }
         }
 
         private void DownloadResourcepack_ProgressChanged(object sender, DownloadProgressChangedEventArgs e)

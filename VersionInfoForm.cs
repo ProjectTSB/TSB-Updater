@@ -12,12 +12,14 @@ namespace TSB_Updater
 
         private string worldPath;
         private Release release;
+        private bool asServer;
 
-        public VersionInfoForm(string worldPath, string currentVersion, Release release)
+        public VersionInfoForm(string worldPath, string currentVersion, Release release, bool asServer = false)
         {
             InitializeComponent();
             this.worldPath = worldPath;
             this.release = release;
+            this.asServer = asServer;
             currentVersionLabel.Text = $"現在のバージョン v{currentVersion}";
             label1.Text = $"新しいバージョン(v{release.Version})が利用可能です";
         }
@@ -33,7 +35,7 @@ namespace TSB_Updater
 
         private void updateButton_Click(object sender, EventArgs e)
         {
-            var dialog = new UpdatingForm(worldPath, release);
+            var dialog = new UpdatingForm(worldPath, release, asServer);
             dialog.ShowDialog();
             this.Result = dialog.Result;
             this.Close();

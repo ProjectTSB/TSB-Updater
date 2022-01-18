@@ -100,7 +100,15 @@ namespace TSB_Updater
                 return;
             }
 
-            var vif = new VersionInfoForm(worldPath.Text, currentVersion, latestRelease);
+            var asServer = false;
+
+            if (UpdaterHelper.CheckUsedServer(worldPath.Text))
+            {
+                var result = MessageBox.Show("サーバー設定ファイルを検知しました。\nサーバー環境としてアップデートを実行しますか？", "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                asServer = result == DialogResult.Yes;
+            }
+
+            var vif = new VersionInfoForm(worldPath.Text, currentVersion, latestRelease, asServer);
 
             vif.ShowDialog();
 
