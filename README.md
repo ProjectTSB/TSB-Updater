@@ -5,6 +5,7 @@ TSBのパッチレベルのアップデートを実行するツール
 ![screenshot0](https://i.imgur.com/kapfRRz.png, "screenshot0")
 
 ## ダウンロード  
+TSB_Updater.zipをダウンロードして起動しなかった場合、TSB_Updater_RuntimePlus.zipをダウンロードしてください。  
 [Releases](https://github.com/ProjectTSB/TSB-Updater/releases)
 
 ## 動作要件  
